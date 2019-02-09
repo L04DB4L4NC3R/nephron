@@ -9,3 +9,8 @@ type ByteReturn struct {
 	Rs  []byte
 	Err error
 }
+
+type ESdata struct {
+	Title string `json:"title"`
+	Body  string `json:"body"`
+}
