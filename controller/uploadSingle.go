@@ -29,15 +29,16 @@ func (f Fetch) UploadHandler() http.HandlerFunc {
 		name := header.Filename
 
 		// create a new file and pipe to it
-		fl, err := os.OpenFile(name, os.O_RDWR|os.O_CREATE, 0755)
+		fl, err := os.OpenFile("data/"+name, os.O_RDWR|os.O_CREATE, 0755)
 		Must(err)
 		defer fl.Close()
 		io.Copy(fl, file)
 
 		// goroutine for converting to text
 		c := make(chan model.StringReturn)
-		go services.ConvertToText(name, c)
+		go services.ConvertToText("data/"+name, c)
 		msg := <-c
+		close(c)
 		Must(msg.Err)
 		w.Write([]byte(msg.Rs))
 
