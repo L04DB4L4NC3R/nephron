@@ -19,6 +19,7 @@
 package main
 
 import (
+	"log"
 	"net/http"
 
 	"github.com/angadsharma1016/nephron/controller"
@@ -26,5 +27,6 @@ import (
 
 func main() {
 	controller.Startup()
+	log.Println("Listening...")
 	http.ListenAndServe(":3000", nil)
 }
