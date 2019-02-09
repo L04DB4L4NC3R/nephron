@@ -23,3 +23,10 @@ type FuzzyReturn struct {
 type Query struct {
 	Query string `json:"query"`
 }
+
+type LogType struct {
+	Query    string  `json:"query"`
+	Hits     int     `json:"hits"`
+	Time     float64 `json:"time"`
+	MaxScore float64 `json:"maxScore"`
+}

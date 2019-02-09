@@ -17,7 +17,8 @@ func (f Fetch) FuzzySearch() http.HandlerFunc {
 
 		msg := <-c
 		Must(msg.Err)
-		fmt.Println(msg.Rs[0]["_source"])
+		fmt.Println(msg.Rs)
+		// fmt.Println(msg.Rs[0]["_source"])
 		w.Write([]byte("DONE"))
 	}
 }

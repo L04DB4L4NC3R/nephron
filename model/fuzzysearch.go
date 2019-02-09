@@ -50,13 +50,34 @@ func FuzzySearch(query string, c chan FuzzyReturn) {
 		c <- FuzzyReturn{arr, fmt.Errorf("No result found")}
 		return
 	}
-	// collect hits
 
+	// logdata- hits and time taken
+	if r["hits"].(map[string]interface{})["total"].(float64) != 0 {
+		RecordLog(LogType{
+			query,
+			int(r["hits"].(map[string]interface{})["total"].(float64)),
+			r["took"].(float64),
+			r["hits"].(map[string]interface{})["max_score"].(float64),
+		})
+
+	} else {
+		RecordLog(LogType{
+			query,
+			0,
+			0,
+			0,
+		})
+		c <- FuzzyReturn{arr, nil}
+		return
+	}
+
+	// collect hits
 	for _, hit := range r["hits"].(map[string]interface{})["hits"].([]interface{}) {
 
 		arr = append(arr, hit.(map[string]interface{}))
 		//log.Printf(" * ID=%s, %s", hit.(map[string]interface{})["_id"], hit.(map[string]interface{})["_source"])
 	}
 	c <- FuzzyReturn{arr, nil}
+	return
 
 }

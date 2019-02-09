@@ -45,6 +45,7 @@ func AddESdata(data []ESdata, c chan error) {
 				log.Printf("[%s] Error indexing document ID=%d", res.Status(), i+1)
 				c <- fmt.Errorf("Error indexing document ID")
 			} else {
+
 				// Deserialize the response into a map.
 				var r map[string]interface{}
 				if err := json.NewDecoder(res.Body).Decode(&r); err != nil {
