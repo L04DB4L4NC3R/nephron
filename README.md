@@ -13,6 +13,35 @@ ___
 <br />
 <br />
 
+### Instructions to run
+
+<br />
+
+#### Setup elastic
+
+
+```bash
+$ chmod +x test_elastic
+$ docker-compose up
+```
+
+<br />
+
+#### Test elastic connection
+
+```bash
+$ ./test_elastic
+```
+
+#### Run main server
+
+```bash
+$ go run main.go
+```
+
+<br />
+
+
 ### Benchmarks on localhost
 
 <br />
