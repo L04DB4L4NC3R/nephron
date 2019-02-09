@@ -9,5 +9,6 @@ func Startup() {
 	http.HandleFunc("/train", Fetch{}.TrainHandler())
 	http.HandleFunc("/search", Fetch{}.FuzzySearch())
 	http.HandleFunc("/get-logs-json", Fetch{}.GetLogsJSON())
+	http.HandleFunc("/search-excel", Fetch{}.ExcelFuzzySearch())
 
 }
