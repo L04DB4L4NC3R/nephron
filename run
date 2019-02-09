@@ -1,0 +1,16 @@
+#!/bin/bash
+
+res=`curl -s -I http://localhost:9200 | grep HTTP/1.1 | awk {'print $2'}`
+
+if [[ "$res" == "200" ]]; then
+res=`curl -s -I -X PUT http://localhost:9200/test | grep HTTP/1.1 | awk {'print $2'}`
+
+if [[ "$res" == "200" ]]; then
+echo "already set index"
+else
+echo "Index test setted"
+fi
+
+else
+echo "elasticsearch not working"
+fi

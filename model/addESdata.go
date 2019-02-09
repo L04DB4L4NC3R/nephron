@@ -3,6 +3,7 @@ package model
 import (
 	"context"
 	"encoding/json"
+	"fmt"
 	"log"
 	"strconv"
 	"strings"
@@ -36,22 +37,25 @@ func AddESdata(data []ESdata, c chan error) {
 
 			// exec request
 			res, err := req.Do(context.Background(), esc)
-			Must(err)
+			c <- err
 			defer res.Body.Close()
-
+			fmt.Println(res)
 			// deserialize response onto a map
 			if res.IsError() {
 				log.Printf("[%s] Error indexing document ID=%d", res.Status(), i+1)
+				c <- fmt.Errorf("Error indexing document ID")
 			} else {
 				// Deserialize the response into a map.
 				var r map[string]interface{}
 				if err := json.NewDecoder(res.Body).Decode(&r); err != nil {
 					log.Printf("Error parsing the response body: %s", err)
+					c <- fmt.Errorf("Error parsing response body")
 				} else {
 					// Print the response status and indexed document version.
 					log.Printf("[%s] %s; version=%d", res.Status(), r["result"], int(r["_version"].(float64)))
 				}
 			}
+			c <- nil
 		}(i, elem)
 	}
 
