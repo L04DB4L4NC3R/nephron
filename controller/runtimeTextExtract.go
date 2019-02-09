@@ -1,6 +1,8 @@
 package controller
 
 import (
+	"encoding/json"
+	"io/ioutil"
 	"net/http"
 
 	"github.com/angadsharma1016/nephron/model"
@@ -23,10 +25,14 @@ func (f Fetch) TrainHandler() http.HandlerFunc {
 		err := <-ce
 		Must(err)
 
-		w.Write(msg.Rs)
-		// json.NewEncoder(w).Encode(struct {
-		// 	Status bool `json:"status"`
-		// }{true})
+		// write to a file for testing purposes
+		err = ioutil.WriteFile("testing.txt", []byte(msg.Rs), 0644)
+		Must(err)
+
+		//w.Write(msg.Rs)
+		json.NewEncoder(w).Encode(struct {
+			Status bool `json:"status"`
+		}{true})
 
 	}
 }

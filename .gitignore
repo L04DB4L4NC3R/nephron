@@ -1,9 +1,10 @@
 test
-.pdf
-.xls
-.xlsx
-.doc
-.docx
-.ppt
-.pptx
+*.pdf
+*.xls
+*.xlsx
+*.doc
+*.docx
+*.ppt
+*.pptx
 data
+*.txt
