@@ -5,6 +5,7 @@ import (
 	"log"
 	"net/http"
 	"os"
+	"strings"
 
 	"github.com/angadsharma1016/nephron/model"
 	"github.com/angadsharma1016/nephron/services"
@@ -34,12 +35,28 @@ func (f Fetch) UploadHandler() http.HandlerFunc {
 		defer fl.Close()
 		io.Copy(fl, file)
 
+		// if name is excel then save filename as key and filepath as value
+		ext := strings.Split(name, ".")[1]
+		if ext == "xls" || ext == "xlsx" || ext == "csv" {
+			c := make(chan error)
+			go model.AddESDataSingle(name, "data/"+name, c)
+			err := <-c
+			close(c)
+			Must(err)
+			w.Write([]byte("DONE"))
+			return
+		}
+
 		// goroutine for converting to text
 		c := make(chan model.StringReturn)
 		go services.ConvertToText("data/"+name, c)
 		msg := <-c
 		close(c)
 		Must(msg.Err)
+
+		cr := make(chan error)
+		model.AddESDataSingle(name, msg.Rs, cr)
+		Must(<-cr)
 		w.Write([]byte(msg.Rs))
 
 		return

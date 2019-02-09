@@ -14,7 +14,7 @@ func FuzzySearch(query string, c chan FuzzyReturn) {
 	res, err := esc.Search(
 		esc.Search.WithContext(context.Background()),
 		esc.Search.WithIndex("test"),
-		esc.Search.WithBody(strings.NewReader(`{"query":{"match":{"title":{"query":"`+query+`", "fuzziness":2}}}}`)),
+		esc.Search.WithBody(strings.NewReader(`{"query":{"match":{"body":{"query":"`+query+`", "fuzziness":"2"}}}}`)),
 		esc.Search.WithTrackTotalHits(true),
 		esc.Search.WithPretty(),
 	)

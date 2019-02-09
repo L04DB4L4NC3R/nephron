@@ -53,6 +53,7 @@ $ go run main.go
 | Extract all text | 20 files (PDFs), 66799 lines of text | 1538 ms |
 | Search for given key | Query sent to stored data on elasticsearch | 6 ms |
 | Give JSON from logs | Log data: timestamp, query, hits, time, maxScore | 2 ms |
+| Load all existing data to elastic | 20 files loaded to elastic, with text, removed buffers | 1140 ms |
 
 <br />
 <br />
