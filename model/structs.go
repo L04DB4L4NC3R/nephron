@@ -30,3 +30,11 @@ type LogType struct {
 	Time     float64 `json:"time"`
 	MaxScore float64 `json:"maxScore"`
 }
+
+type Logs struct {
+	Timestamp string `json:"timestamp,omitempty"`
+	Query     string `json:"query,omitempty"`
+	Hits      string `json:"hits,omitempty"`
+	Time      string `json:"time,omitempty"`
+	MaxScore  string `json:"maxScore,omitempty"`
+}

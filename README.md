@@ -7,6 +7,8 @@ ___
 - [X] Fuzzy search
 - [X] Elasticsearch
 - [X] Annotation/classification
+- [X] Logs Collector
+- [X] Chart log data
 - [ ] BigQuery
 - [ ] Hadoop
 
@@ -50,6 +52,7 @@ $ go run main.go
 |:---:|:---:|:---:|
 | Extract all text | 20 files (PDFs), 66799 lines of text | 1538 ms |
 | Search for given key | Query sent to stored data on elasticsearch | 6 ms |
+| Give JSON from logs | Log data: timestamp, query, hits, time, maxScore | 2 ms |
 
 <br />
 <br />
