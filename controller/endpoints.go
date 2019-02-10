@@ -1,10 +1,13 @@
 package controller
 
 import (
+	"log"
+	"net/http"
+
 	"github.com/gorilla/mux"
 )
 
-func Startup() *mux.Router {
+func Startup() {
 	router := mux.NewRouter()
 
 	router.HandleFunc("/upload", Fetch{}.UploadHandler()).Methods("GET", "OPTIONS", "POST")
@@ -12,6 +15,8 @@ func Startup() *mux.Router {
 	router.HandleFunc("/search", Fetch{}.FuzzySearch()).Methods("GET", "OPTIONS", "POST")
 	router.HandleFunc("/get-logs-json", Fetch{}.GetLogsJSON()).Methods("GET", "OPTIONS", "POST")
 	router.HandleFunc("/search-excel", Fetch{}.ExcelFuzzySearch()).Methods("GET", "OPTIONS", "POST")
-	return router
+
+	log.Println("Listening...")
+	http.ListenAndServe(":3000", router)
 
 }
