@@ -8,13 +8,15 @@ services:
     ports:
       - 9200:9200
       - 9300:9300
+    volumes:
+      - esdata1:/usr/share/elasticsearch/data
   gorest:
     container_name: gorest
     build: 
       context: .
       dockerfile: ./Dockerfile
     volumes:
-    - .:/go/src/github.com/angadsharma1016/nephron
+      - .:/go/src/github.com/angadsharma1016/nephron
     ports:
       - 3000:3000
     restart: on-failure
@@ -22,3 +24,6 @@ services:
       - elasticsearch
     environment:
       ELASTICSEARCH_URL: "http://elasticsearch:9200"
+
+volumes:
+  esdata1:

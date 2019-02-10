@@ -15,4 +15,5 @@ func RecordLog(logstring LogType) {
 
 	log.SetOutput(f)
 	log.Println(fmt.Sprintf(",%s,%d,%f,%f", logstring.Query, logstring.Hits, logstring.Time, logstring.MaxScore))
+
 }

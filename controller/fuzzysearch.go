@@ -9,7 +9,7 @@ import (
 	"github.com/angadsharma1016/nephron/model"
 )
 
-func (f Fetch) FuzzySearch() http.HandlerFunc {
+func FuzzySearch() http.HandlerFunc {
 	// this link only if no xls, xlsx, csv
 	return func(w http.ResponseWriter, r *http.Request) {
 		w.Header().Set("Access-Control-Allow-Origin", "*")
@@ -27,13 +27,16 @@ func (f Fetch) FuzzySearch() http.HandlerFunc {
 			return
 		}
 
-		w.Write([]byte(msg.Rs[0]["_source"].(map[string]interface{})["body"].(string)))
+		w.Write([]byte(
+			msg.Rs[0]["_source"].(map[string]interface{})["title"].(string) + "\n" +
+				msg.Rs[0]["_source"].(map[string]interface{})["body"].(string),
+		))
 
 	}
 }
 
 // handles excel files and forms
-func (f Fetch) ExcelFuzzySearch() http.HandlerFunc {
+func FetchFuzzySearch() http.HandlerFunc {
 	// this link only if no xls, xlsx, csv
 	return func(w http.ResponseWriter, r *http.Request) {
 		w.Header().Set("Access-Control-Allow-Origin", "*")
@@ -43,21 +46,12 @@ func (f Fetch) ExcelFuzzySearch() http.HandlerFunc {
 			fmt.Println(err)
 		}
 		f := r.Form
-		c := make(chan model.FuzzyReturn)
+		str := f.Get("query")
 
-		go model.FuzzySearch(f.Get("query"), c)
-
-		msg := <-c
-		Must(msg.Err)
-		if len(msg.Rs) == 0 {
-			log.Println("Search miss")
-			w.Write([]byte("Search miss"))
-			return
-		}
-
-		http.ServeFile(w, r, msg.Rs[0]["_source"].(map[string]interface{})["body"].(string))
+		http.ServeFile(w, r, "data/"+str)
 
 		//w.Write([]byte(msg.Rs[0]["_source"].(map[string]interface{})["body"].(string)))
 
 	}
+
 }

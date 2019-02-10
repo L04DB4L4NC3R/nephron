@@ -7,7 +7,7 @@ import (
 	"github.com/angadsharma1016/nephron/services"
 )
 
-func (f Fetch) GetLogsJSON() http.HandlerFunc {
+func GetLogsJSON() http.HandlerFunc {
 
 	return func(w http.ResponseWriter, r *http.Request) {
 		w.Header().Set("Access-Control-Allow-Origin", "*")

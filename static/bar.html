@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+<head>
+	<script src="js/plotly-latest.min.js"></script>
+</head>
+
+<script>
+$(document).ready(function(){
+  $.ajax({
+    url:"http://localhost:3000/get-logs-json",
+    success:function(e){
+      e = JSON.parse(e)
+      qr=[]
+      score=[]
+        for(let i of e) {
+          
+          qr.push(i.query)
+          score.push(i.maxScore)
+        }
+      var data = [{
+  values: score,
+  labels: qr,
+  type: 'pie'
+}];
+
+var layout = {
+  height: 400,
+  width: 500
+};
+
+Plotly.newPlot('myDiv', data, layout);
+
+          },
+    error:function(err,xhr,status){
+      console.log(err);
+    }    
+  })
+});
+</script>
+</head>
+<body>
+<div id="myDiv">
+</div></body>
+</html>
+
+
+

@@ -40,7 +40,6 @@ func FuzzySearch(query string, c chan FuzzyReturn) {
 			return
 		}
 	}
-
 	if err := json.NewDecoder(res.Body).Decode(&r); err != nil {
 		log.Fatalf("Error parsing the response body: %s", err)
 	}
