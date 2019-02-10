@@ -10,7 +10,7 @@
 <script>
 $(document).ready(function(){
   $.ajax({
-    url:"http://localhost:3000/get-logs-json",
+    url:"http://142.93.210.185:3000/get-logs-json",
     success:function(e){
       e = JSON.parse(e)
       qr=[]
@@ -18,8 +18,11 @@ $(document).ready(function(){
         for(let i of e) {
           
           qr.push(i.query)
-          score.push(i.maxScore)
+		  val=i.timestamp.split(" ")[1]
+		  val=val.split(":")
+          score.push(parseInt(val[0])*60 + parseInt(val[1]) + parseInt(val[2])/60)
         }
+		console.log(score)
       var data = [{
   values: score,
   labels: qr,
@@ -31,7 +34,7 @@ var layout = {
   width: 500
 };
 
-Plotly.newPlot('myDiv', data, layout);
+Plotly.newPlot('myDiv', data);
 
           },
     error:function(err,xhr,status){
@@ -42,9 +45,6 @@ Plotly.newPlot('myDiv', data, layout);
 </script>
 </head>
 <body>
-<div id="myDiv">
+<div id="myDiv" style="width:100%;height:100%">
 </div></body>
 </html>
-
-
-

@@ -9,8 +9,7 @@ ___
 - [X] Annotation/classification
 - [X] Logs Collector
 - [X] Chart log data
-- [ ] BigQuery
-- [ ] Hadoop
+- [X] Serve matched files and/or file data
 
 <br />
 <br />
@@ -49,6 +48,36 @@ $ ./run
 
 <br />
 <br />
+<br />
+<br />
 
+
+#### Queries v/s accuracy score
+
+<br />
+<br />
+
+![Pie chart 1](static/img/pie1.png)
+
+<br />
+<br />
+<br />
+<br />
+
+
+#### Queries v/s frequency
+
+<br />
+<br />
+
+![Pie chart 2](static/img/pie2.png)
+
+<br />
+<br />
+
+#### Workflow
+
+<br />
+<br />
 
 ![Workflow](static/img/workflow.png)
