@@ -52,7 +52,7 @@ $ ./run
 <br />
 
 
-#### Queries v/s accuracy score
+#### Queries v/s frequency score
 
 <br />
 <br />
@@ -65,7 +65,7 @@ $ ./run
 <br />
 
 
-#### Queries v/s frequency
+#### Queries v/s confidence
 
 <br />
 <br />
