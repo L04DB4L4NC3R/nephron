@@ -29,16 +29,11 @@ $ docker-compose up
 
 <br />
 
-#### Test elastic connection
+#### Run project
 
 ```bash
-$ ./test_elastic
-```
-
-#### Run main server
-
-```bash
-$ go run main.go
+$ chmod +x run
+$ ./run
 ```
 
 <br />
