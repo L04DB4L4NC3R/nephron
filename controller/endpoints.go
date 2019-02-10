@@ -1,14 +1,17 @@
 package controller
 
 import (
-	"net/http"
+	"github.com/gorilla/mux"
 )
 
-func Startup() {
-	http.HandleFunc("/upload", Fetch{}.UploadHandler())
-	http.HandleFunc("/train", Fetch{}.TrainHandler())
-	http.HandleFunc("/search", Fetch{}.FuzzySearch())
-	http.HandleFunc("/get-logs-json", Fetch{}.GetLogsJSON())
-	http.HandleFunc("/search-excel", Fetch{}.ExcelFuzzySearch())
+func Startup() *mux.Router {
+	router := mux.NewRouter()
+
+	router.HandleFunc("/upload", Fetch{}.UploadHandler()).Methods("GET", "OPTIONS", "POST")
+	router.HandleFunc("/train", Fetch{}.TrainHandler()).Methods("GET", "OPTIONS", "POST")
+	router.HandleFunc("/search", Fetch{}.FuzzySearch()).Methods("GET", "OPTIONS", "POST")
+	router.HandleFunc("/get-logs-json", Fetch{}.GetLogsJSON()).Methods("GET", "OPTIONS", "POST")
+	router.HandleFunc("/search-excel", Fetch{}.ExcelFuzzySearch()).Methods("GET", "OPTIONS", "POST")
+	return router
 
 }

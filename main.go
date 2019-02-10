@@ -1,21 +1,3 @@
-// package main
-
-// import (
-// 	"fmt"
-// 	"log"
-
-// 	"code.sajari.com/docconv/client"
-// )
-
-// func main() {
-// 	c := client.New()
-// 	res, err := client.ConvertPath(c, `test.pdf`)
-// 	if err != nil {
-// 		log.Fatal(err)
-// 	}
-// 	fmt.Println(res)
-// }
-
 package main
 
 import (
@@ -28,7 +10,7 @@ import (
 
 func main() {
 	model.ConnectElastic()
-	controller.Startup()
+	muxx := controller.Startup()
 	log.Println("Listening...")
-	http.ListenAndServe(":3000", nil)
+	http.ListenAndServe(":3000", muxx)
 }

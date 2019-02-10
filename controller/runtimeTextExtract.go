@@ -10,7 +10,8 @@ import (
 
 func (f Fetch) TrainHandler() http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
-
+		w.Header().Set("Access-Control-Allow-Origin", "*")
+		w.Header().Set("Access-Control-Allow-Headers", "Content-Type")
 		// get all data
 		c := make(chan []model.ESdata)
 		go services.All2text("data", c)

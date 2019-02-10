@@ -12,6 +12,8 @@ import (
 func (f Fetch) FuzzySearch() http.HandlerFunc {
 	// this link only if no xls, xlsx, csv
 	return func(w http.ResponseWriter, r *http.Request) {
+		w.Header().Set("Access-Control-Allow-Origin", "*")
+		w.Header().Set("Access-Control-Allow-Headers", "Content-Type")
 		var q model.Query
 		json.NewDecoder(r.Body).Decode(&q)
 		c := make(chan model.FuzzyReturn)
@@ -34,7 +36,8 @@ func (f Fetch) FuzzySearch() http.HandlerFunc {
 func (f Fetch) ExcelFuzzySearch() http.HandlerFunc {
 	// this link only if no xls, xlsx, csv
 	return func(w http.ResponseWriter, r *http.Request) {
-
+		w.Header().Set("Access-Control-Allow-Origin", "*")
+		w.Header().Set("Access-Control-Allow-Headers", "Content-Type")
 		err := r.ParseForm() // ParseMultipartForm to deal with multipart data, it calls ParseForm also
 		if err != nil {
 			fmt.Println(err)
