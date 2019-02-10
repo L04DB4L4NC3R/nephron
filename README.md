@@ -19,18 +19,6 @@ ___
 
 <br />
 
-#### Setup elastic
-
-
-```bash
-$ chmod +x test_elastic
-$ docker-compose up
-```
-
-<br />
-
-#### Run project
-
 ```bash
 $ chmod +x run
 $ ./run
